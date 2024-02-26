@@ -18,7 +18,7 @@ defmodule TodoWeb.Router do
     pipe_through :browser
 
     get "/", TaskController, :index
-    resources "/tasks", TaskController, except: [:index, :new, :show]
+    resources "/tasks", TaskController, except: [:index, :new]
     get "/tasks/completed/:id", TaskController, :compleate
     get "/tasks/clear",TaskController, :clear
   end

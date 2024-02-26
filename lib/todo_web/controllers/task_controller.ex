@@ -30,10 +30,10 @@ defmodule TodoWeb.TaskController do
     end
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   task = Tasks.get_task!(id)
-  #   render(conn, "show.html", task: task)
-  # end
+  def show(conn, %{"id" => id}) do
+    task = Tasks.get_task!(id)
+    render(conn, "show.html", task: task)
+  end
 
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
