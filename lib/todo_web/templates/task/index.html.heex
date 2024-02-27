@@ -11,8 +11,12 @@
           <%= for task <- @tasks do %>
           <tr>
             <td>
-               <%= link to: Routes.task_path(@conn, :compleate, task) do %>
-               &#10004
+              <%= link to: Routes.task_path(@conn, :compleate, task) do %>
+              <%= if task.compleated do%>
+                  &#9745 undo
+                <% else %>
+                &#10004 done
+                <% end %>
               <% end %>
             </td>
 

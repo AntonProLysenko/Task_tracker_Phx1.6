@@ -18,6 +18,16 @@ defmodule TodoWeb.TaskController do
   #   render(conn, "new.html", changeset: changeset)
   # end
 
+  def compleate(conn, %{"id" => id}) do
+    IO.puts("Im here!!!")
+    task = Tasks.get_task!(id)
+    Tasks.update_task(task, compleated?(task.compleated))
+    redirect(conn, to: Routes.task_path(conn, :index))
+  end
+
+  defp compleated?(false), do: %{"compleated"=> "true"}
+  defp compleated?(true), do: %{"compleated"=> "false"}
+
   def create(conn, %{"task" => task_params}) do
     case Tasks.create_task(task_params) do
       {:ok, _task} ->
