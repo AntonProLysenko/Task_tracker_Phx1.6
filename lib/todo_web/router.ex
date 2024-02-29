@@ -18,9 +18,9 @@ defmodule TodoWeb.Router do
     pipe_through :browser
 
     get "/", TaskController, :index
-    resources "/tasks", TaskController, except: [:index, :new]
+    resources "/tasks", TaskController, except: [:index, :new, :show] #show needs to be included, so tasks/clear the word clear does't considered as ID
     get "/tasks/completed/:id", TaskController, :compleate
-    get "/tasks/clear",TaskController, :clear
+    get "/tasks/clear/",TaskController, :clear
   end
 
   # Other scopes may use custom stacks.

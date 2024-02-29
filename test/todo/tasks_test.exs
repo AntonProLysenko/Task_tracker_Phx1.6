@@ -11,8 +11,8 @@ defmodule Todo.TasksTest do
     @invalid_attrs %{text: nil, compleated: nil}
 
     test "list_tasks/0 returns all tasks" do
-      task = task_fixture()
-      assert Tasks.list_tasks() == [task]
+      tasks = tasks_fixtures()
+      assert Tasks.list_tasks() == tasks
     end
 
     test "get_task!/1 returns the task with given id" do
@@ -56,6 +56,13 @@ defmodule Todo.TasksTest do
     test "change_task/1 returns a task changeset" do
       task = task_fixture()
       assert %Ecto.Changeset{} = Tasks.change_task(task)
+    end
+
+    test "clear/1 updates task.compleated to false" do
+      task_fixture()
+      clear = Tasks.clear()
+
+      assert {1, _task} = clear
     end
   end
 end

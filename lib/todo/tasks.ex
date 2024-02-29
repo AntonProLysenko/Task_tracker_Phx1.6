@@ -18,7 +18,10 @@ defmodule Todo.Tasks do
 
   """
   def list_tasks do
-    Repo.all(Task)
+    Task
+    |> order_by(asc: :compleated)
+    |> order_by(desc: :id)
+    |> Repo.all()
   end
 
   @doc """
@@ -100,5 +103,10 @@ defmodule Todo.Tasks do
   """
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
+  end
+
+  def clear()do
+    from(task in Task, where: task.compleated == true, select: task)
+    |> Repo.update_all(set: [compleated: false])
   end
 end
